@@ -17,7 +17,7 @@ const CardDestination = ({ destination }) => {
         />
 
         {/* rating */}
-        <div className="absolute top-3 right-3 bg-white px-3 py-1 flex items-center gap-1 text-sm font-semibold">
+        <div className="absolute top-3 right-3 bg-gray-300 px-3 py-1 flex items-center gap-1 text-sm font-semibold">
           4.5
           <FaStar className="text-black text-xs" />
         </div>
