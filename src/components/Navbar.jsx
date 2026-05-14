@@ -7,7 +7,7 @@ const Navbar = () => {
   const navLink = (
     <>
       <li>
-        <Link href={'/home'}>Home</Link>
+        <Link href={'/'}>Home</Link>
       </li>
       <li>
         <Link href={'/destinations'}>Destinations</Link>
@@ -17,6 +17,9 @@ const Navbar = () => {
       </li>
       <li>
         <Link href={'/admin'}>Admin</Link>
+      </li>
+      <li>
+        <Link href={'/add-destination'}>Add Destination</Link>
       </li>
     </>
   );
