@@ -1,9 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { FaArrowUp, FaCalendarAlt, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 
 const CardDestination = ({ destination }) => {
-  const { imageUrl, destinationName, country, price, duration } = destination;
+  const { imageUrl, destinationName, country, price, duration, _id } = destination;
   return (
     <div className="group bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
       {/* image */}
@@ -32,12 +33,12 @@ const CardDestination = ({ destination }) => {
 
         {/* title + price */}
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-medium text-gray-800">Title</h2>
+          <h2 className="text-2xl font-medium text-gray-800">
+            {destinationName}
+          </h2>
 
           <div>
-            <span className="text-xl font-semibold text-black">
-              ${price}
-            </span>
+            <span className="text-xl font-semibold text-black">${price}</span>
             <span className="text-gray-400 text-sm">/Person</span>
           </div>
         </div>
@@ -49,10 +50,12 @@ const CardDestination = ({ destination }) => {
         </div>
 
         {/* button */}
-        <button className="flex items-center gap-2 text-cyan-500 font-medium pt-2 group/btn">
-          BOOK NOW
-          <FaArrowUp className="rotate-45 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition duration-300" />
-        </button>
+        <Link href={`/destinations/${_id}`}>
+          <button className="flex items-center gap-2 text-cyan-500 font-medium pt-2 group/btn">
+            BOOK NOW
+            <FaArrowUp className="rotate-45 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition duration-300" />
+          </button>
+        </Link>
       </div>
     </div>
   );
