@@ -1,9 +1,24 @@
+'use client'
+import { authClient } from '@/lib/auth-client';
+import { Avatar } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 
 const Navbar = () => {
+  const {
+    data: session,
+    isPending, //loading state
+    error, //error object
+    refetch, //refetch the session
+  } = authClient.useSession(); 
+  const user = session?.user;
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+  }
+
   const navLink = (
     <>
       <li>
@@ -26,18 +41,39 @@ const Navbar = () => {
 
   const navBtn = (
     <>
-      <li>
-        <Link href={'/profile'}>
+      <li className="flex items-center">
+        <Link className="flex items-center gap-1" href={'/profile'}>
           <AiOutlineUser />
           Profile
         </Link>
       </li>
-      <li>
-        <Link href={'/login'}>Login</Link>
-      </li>
-      <li>
-        <Link href={'/signup'}>Sign Up</Link>
-      </li>
+      {user ? (
+        <>
+          <li className="flex items-center">
+            <Avatar>
+              <Avatar.Image
+                referrerPolicy='no-referrer'
+                alt="John Doe"
+                src={user?.image}
+                className="rounded-full"
+              />
+              <Avatar.Fallback>{user?.name[0].toUpperCase()}</Avatar.Fallback>
+            </Avatar>
+          </li>
+          <li className="flex items-center">
+            <button onClick={handleLogout} className='btn bg-red-500 text-white'>LogOut</button>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link href={'/login'}>Login</Link>
+          </li>
+          <li>
+            <Link href={'/signup'}>Sign Up</Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -75,13 +111,14 @@ const Navbar = () => {
       <div className="navbar-center">
         <Image
           src={'/assets/Wanderlast.png'}
-          height={150}
-          width={150}
+          height={15}
+          width={130}
           alt="Logo"
+          className='w-32 h-auto'
         />
       </div>
       <div className="navbar-end">
-        <ul className="menu menu-horizontal px-1">{navBtn}</ul>
+        <ul className="menu menu-horizontal items-center gap-2 px-1">{navBtn}</ul>
       </div>
     </div>
   );

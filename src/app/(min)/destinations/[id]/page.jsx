@@ -1,6 +1,6 @@
+import CardLeft from '@/components/CardLeft';
 import { DeleteAlert } from '@/components/DeleteAlert';
 import EditModel from '@/components/EditModel';
-import { Button } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -8,10 +8,6 @@ import {
   FaStar,
   FaMapMarkerAlt,
   FaCalendarAlt,
-  FaCheck,
-  FaArrowRight,
-  FaPen,
-  FaTrash,
 } from 'react-icons/fa';
 
 const DetailsPage = async ({ params }) => {
@@ -28,7 +24,9 @@ const DetailsPage = async ({ params }) => {
      duration,
      departureDate,
      description,
-   } = destination;
+  } = destination;
+
+  
   return (
     <div className="container mx-auto px-5 py-8">
       {/* top nav */}
@@ -96,44 +94,7 @@ const DetailsPage = async ({ params }) => {
         </div>
 
         {/* right card */}
-        <div>
-          <div className="border p-6 shadow-sm space-y-6 sticky top-10">
-            <div>
-              <p className="text-gray-400 text-sm mb-1">Starting from</p>
-
-              <h2 className="text-5xl font-light text-cyan-500">${price}</h2>
-
-              <p className="text-gray-400 mt-1">per person</p>
-            </div>
-
-            <input
-              type="date"
-              className="w-full border px-4 py-3 outline-none"
-            />
-
-            <button className="w-full bg-cyan-500 hover:bg-cyan-600 transition text-white py-4 flex items-center justify-center gap-2">
-              Book Now
-              <FaArrowRight />
-            </button>
-
-            <div className="space-y-3 text-gray-500 text-sm">
-              <div className="flex items-center gap-3">
-                <FaCheck className="text-green-500" />
-                <span>Free cancellation up to 7 days</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <FaCheck className="text-green-500" />
-                <span>Travel insurance included</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <FaCheck className="text-green-500" />
-                <span>24/7 customer support</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <CardLeft destination={destination} />
       </div>
     </div>
   );
